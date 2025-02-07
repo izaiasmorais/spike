@@ -2,7 +2,7 @@ import { CircleHelp, PersonStanding } from "lucide-react";
 
 export function Heading() {
 	return (
-		<div className="bg-slate-100 flex py-2 px-4 justify-end text-sm">
+		<div className="bg-zinc-100 text-muted-foreground flex py-2 px-4 justify-end text-xs">
 			<nav className="flex items-center gap-8">
 				<span className="flex items-center gap-2">
 					<PersonStanding size={20} />
