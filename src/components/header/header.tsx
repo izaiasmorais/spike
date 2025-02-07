@@ -1,9 +1,12 @@
 import { Search, ShoppingCart } from "lucide-react";
+import Link from "next/link";
 
 export function Header() {
 	return (
 		<header className="py-4 px-8 flex items-center justify-between bg-muted/50">
-			<h1 className="text-3xl font-bold tracking-wide">Spike</h1>
+			<Link href="/">
+				<h1 className="text-3xl font-bold tracking-wide">Spike</h1>
+			</Link>
 
 			<div
 				className="py-2 px-4 rounded-full w-[500px] md:flex items-center justify-between
@@ -18,7 +21,9 @@ export function Header() {
 				<Search size={16} className="text-muted-foreground" />
 			</div>
 
-			<ShoppingCart />
+			<Link href="/carrinho">
+				<ShoppingCart />
+			</Link>
 		</header>
 	);
 }

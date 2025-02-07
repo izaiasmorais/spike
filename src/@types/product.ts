@@ -1,5 +1,6 @@
 export type Product = {
 	title: string;
+	slug: string;
 	description: string;
 	price: number;
 	priceWithoutPromotion: number | null;
@@ -9,5 +10,5 @@ export type Product = {
 	category: string;
 	rating: number;
 	sizes: number[];
-	availableSizes: number[] | null;
+	availableSizes: number[];
 };

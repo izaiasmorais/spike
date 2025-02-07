@@ -4,6 +4,8 @@ import { StarRating } from "./star-rating";
 import { Product } from "@/@types/product";
 import { useEffect, useState } from "react";
 import { ProductsListItemSkeleton } from "./products-list-item-skeleton";
+import Link from "next/link";
+import { ProductPrices } from "./product-prices";
 
 interface ProductsListItemProps {
 	product: Product;
@@ -23,7 +25,10 @@ export function ProductsListItem({ product }: ProductsListItemProps) {
 	}
 
 	return (
-		<div className="flex flex-col gap-5 overflow-hidden rounded-lg cursor-pointer">
+		<Link
+			href={`/produto/${product.slug}`}
+			className="flex flex-col gap-5 overflow-hidden rounded-lg cursor-pointer"
+		>
 			<Image
 				src={product.images[0]}
 				width={350}
@@ -37,29 +42,12 @@ export function ProductsListItem({ product }: ProductsListItemProps) {
 
 				<span className="text-muted-foreground">{product.category}</span>
 
-				<div className="flex items-center gap-2">
-					<span>
-						{new Intl.NumberFormat("pt-BR", {
-							style: "currency",
-							currency: "BRL",
-						}).format(product.price)}
-					</span>
-					<span className="line-through text-muted-foreground">
-						{product.priceWithoutPromotion &&
-							new Intl.NumberFormat("pt-BR", {
-								style: "currency",
-								currency: "BRL",
-							}).format(product.priceWithoutPromotion)}
-					</span>
-					<span className="text-green-700">
-						{product.promotionPercentage && `-${product.promotionPercentage}%`}
-					</span>
-				</div>
+				<ProductPrices product={product} />
 
 				<div className="flex items-center gap-1">
 					<StarRating rating={product.rating} />
 				</div>
 			</div>
-		</div>
+		</Link>
 	);
 }
