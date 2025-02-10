@@ -1,9 +1,5 @@
-import { ProductPrices } from "@/components/products/product-prices";
-import { ProductSizes } from "@/components/products/product-sizes";
-import { StarRating } from "@/components/products/star-rating";
-import { Button } from "@/components/ui/button";
+import { ProductDetails } from "@/components/products/product-details";
 import { stripe } from "@/lib/stripe";
-import Image from "next/image";
 import Stripe from "stripe";
 
 async function fetchProductBySlug(slug: string) {
@@ -46,42 +42,10 @@ interface ProductProps {
 	};
 }
 
-export default async function ProductDetails({ params }: ProductProps) {
+export default async function ProductDetailsContainer({
+	params,
+}: ProductProps) {
 	const product = await fetchProductBySlug(params.slug);
 
-	return (
-		<section className="max-w-[1200px] w-full mx-auto py-8 px-4 flex gap-8">
-			<Image
-				src={`${product.images[0]}`}
-				width={500}
-				height={500}
-				alt={product.title}
-				className="rounded-lg"
-			/>
-
-			<div className="flex flex-col gap-2">
-				<h1 className="text-2xl">{product.title}</h1>
-				<span className="text-muted-foreground">{product.category}</span>
-
-				<div className="flex items-center gap-1">
-					<StarRating rating={product.rating} />
-				</div>
-
-				<ProductPrices product={product} />
-
-				<ProductSizes
-					productSizes={product.sizes}
-					availableSizes={product.availableSizes}
-				/>
-
-				<Button className="rounded-full px-8 mt-8 py-6">
-					Adicionar ao carrinho
-				</Button>
-
-				<div className="mt-4 w-[300px]">
-					<p>{product.description}</p>
-				</div>
-			</div>
-		</section>
-	);
+	return <ProductDetails product={product} />;
 }
