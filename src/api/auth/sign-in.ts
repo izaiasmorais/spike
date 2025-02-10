@@ -5,6 +5,11 @@ import { api } from "@/lib/axios";
 interface SignInResponseBody extends HTTPResponse {
 	data: {
 		token: string;
+		user: {
+			id: string;
+			name: string;
+			email: string;
+		};
 	};
 }
 

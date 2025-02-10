@@ -5,11 +5,12 @@ import { ProductSizes } from "@/components/products/product-sizes";
 import { StarRating } from "@/components/products/star-rating";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import Cookie from "universal-cookie";
-import Image from "next/image";
 import { useState } from "react";
 import { toast } from "sonner";
 import { useCart } from "@/stores/cart";
+
+import Image from "next/image";
+import Cookies from "js-cookie";
 
 interface ProductDetailsProps {
 	product: Product;
@@ -18,11 +19,10 @@ interface ProductDetailsProps {
 export function ProductDetails({ product }: ProductDetailsProps) {
 	const [size, setSize] = useState<number | null>(null);
 	const router = useRouter();
-	const cookies = new Cookie();
 	const { addToCart } = useCart();
 
 	function handleAddProductToCart() {
-		if (cookies.get("access_token") === undefined) {
+		if (Cookies.get("access_token") === undefined) {
 			router.push("/entrar");
 			return;
 		}

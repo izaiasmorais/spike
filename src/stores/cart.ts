@@ -24,6 +24,7 @@ interface CartState {
 	removeFromCart: (defaultPriceId: string) => void;
 	cartCount: () => number;
 	calculateTotal: () => number;
+	clearCart: () => void;
 }
 
 export const useCart = create<CartState>()(
@@ -106,6 +107,10 @@ export const useCart = create<CartState>()(
 					(sum, item) => sum + item.price * item.quantity,
 					0
 				);
+			},
+
+			clearCart: () => {
+				set(() => ({ cart: [], totalPrice: 0 }));
 			},
 		}),
 		{ name: "cart-storage" }

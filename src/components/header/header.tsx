@@ -1,6 +1,7 @@
-import { Search } from "lucide-react";
-import Link from "next/link";
 import CartIcon from "./cart-icon";
+import Link from "next/link";
+import { Search } from "lucide-react";
+import { Menu } from "./menu";
 
 export function Header() {
 	return (
@@ -22,7 +23,11 @@ export function Header() {
 				<Search size={16} className="text-muted-foreground" />
 			</div>
 
-			<CartIcon />
+			<div className="flex items-center space-x-4">
+				<Menu />
+
+				<CartIcon />
+			</div>
 		</header>
 	);
 }
