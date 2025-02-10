@@ -11,4 +11,5 @@ export type Product = {
 	rating: number;
 	sizes: number[];
 	availableSizes: number[];
+	defaultPriceId: string;
 };

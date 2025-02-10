@@ -18,6 +18,7 @@ async function fetchProductBySlug(slug: string) {
 
 	return {
 		title: product.name,
+		defaultPriceId: price.id,
 		description: product.description ?? "",
 		price: price.unit_amount ? price.unit_amount / 100 : 0,
 		images: product.images || null,
