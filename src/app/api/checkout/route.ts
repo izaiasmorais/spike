@@ -31,6 +31,7 @@ export async function POST(req: Request) {
 			mode: "payment",
 			payment_method_types: ["card"],
 			line_items: lineItems,
+			billing_address_collection: "required",
 			success_url: `${process.env.NEXT_PUBLIC_APP_URL}/sucesso`,
 			cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/carrinho`,
 		});
