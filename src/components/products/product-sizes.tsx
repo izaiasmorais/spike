@@ -1,12 +1,32 @@
+import { Dispatch, SetStateAction } from "react";
+
 interface ProductSizesProps {
 	productSizes: number[];
 	availableSizes: number[];
+	onSetSize: Dispatch<SetStateAction<number | null>>;
+	selectedSize: number | null;
 }
 
 export function ProductSizes({
 	productSizes,
 	availableSizes,
+	onSetSize,
+	selectedSize,
 }: ProductSizesProps) {
+	function handleSetSize(size: number) {
+		if (selectedSize === null) {
+			onSetSize(size);
+		}
+
+		if (selectedSize !== null && selectedSize === size) {
+			onSetSize(null);
+		}
+
+		if (selectedSize !== null && selectedSize !== size) {
+			onSetSize(size);
+		}
+	}
+
 	return (
 		<div className="flex flex-col gap-4 mt-4">
 			<span>Selecione um tamanho</span>
@@ -16,8 +36,11 @@ export function ProductSizes({
 					if (availableSizes.includes(size)) {
 						return (
 							<div
-								className="rounded-md w-10 h-10 border flex items-center justify-center
-									cursor-pointer hover:bg-muted/50"
+								className={`rounded-md w-10 h-10 border flex items-center justify-center
+									cursor-pointer hover:bg-muted/50 ${
+										size === selectedSize ? "border-2 border-black" : ""
+									}`}
+								onClick={() => handleSetSize(size)}
 							>
 								{size}
 							</div>

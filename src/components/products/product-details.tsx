@@ -7,14 +7,19 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import Cookie from "universal-cookie";
 import Image from "next/image";
+import { useState } from "react";
+import { toast } from "sonner";
+import { useCart } from "@/stores/cart";
 
 interface ProductDetailsProps {
 	product: Product;
 }
 
 export function ProductDetails({ product }: ProductDetailsProps) {
+	const [size, setSize] = useState<number | null>(null);
 	const router = useRouter();
 	const cookies = new Cookie();
+	const { addToCart } = useCart();
 
 	function handleAddProductToCart() {
 		if (cookies.get("access_token") === undefined) {
@@ -22,7 +27,12 @@ export function ProductDetails({ product }: ProductDetailsProps) {
 			return;
 		}
 
-		console.log("Product added to cart");
+		if (size === null) {
+			toast.info("Selecione um tamanho para adicionar ao carrinho");
+			return;
+		}
+
+		addToCart(product, size);
 	}
 
 	return (
@@ -51,6 +61,8 @@ export function ProductDetails({ product }: ProductDetailsProps) {
 				<ProductSizes
 					productSizes={product.sizes}
 					availableSizes={product.availableSizes}
+					onSetSize={setSize}
+					selectedSize={size}
 				/>
 
 				<Button

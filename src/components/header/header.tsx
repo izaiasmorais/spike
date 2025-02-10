@@ -1,5 +1,6 @@
-import { Search, ShoppingCart } from "lucide-react";
+import { Search } from "lucide-react";
 import Link from "next/link";
+import CartIcon from "./cart-icon";
 
 export function Header() {
 	return (
@@ -21,9 +22,7 @@ export function Header() {
 				<Search size={16} className="text-muted-foreground" />
 			</div>
 
-			<Link href="/carrinho">
-				<ShoppingCart />
-			</Link>
+			<CartIcon />
 		</header>
 	);
 }
