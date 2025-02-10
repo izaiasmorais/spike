@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
+import Providers from "./providers";
 
 import "./globals.css";
 
@@ -19,7 +20,9 @@ export default function RootLayout({
 				<link rel="icon" href="/spike.svg" sizes="any" />
 			</head>
 
-			<body className={GeistSans.className}>{children}</body>
+			<body className={GeistSans.className}>
+				<Providers>{children}</Providers>
+			</body>
 		</html>
 	);
 }

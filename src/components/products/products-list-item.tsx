@@ -1,29 +1,14 @@
-"use client";
 import Image from "next/image";
+import { ProductPrices } from "./product-prices";
 import { StarRating } from "./star-rating";
 import { Product } from "@/@types/product";
-import { useEffect, useState } from "react";
-import { ProductsListItemSkeleton } from "./products-list-item-skeleton";
 import Link from "next/link";
-import { ProductPrices } from "./product-prices";
 
 interface ProductsListItemProps {
 	product: Product;
 }
 
 export function ProductsListItem({ product }: ProductsListItemProps) {
-	const [isLoading, setIsLoading] = useState(true);
-
-	useEffect(() => {
-		setTimeout(() => {
-			setIsLoading(false);
-		}, 300);
-	});
-
-	if (isLoading) {
-		return <ProductsListItemSkeleton />;
-	}
-
 	return (
 		<Link
 			href={`/produto/${product.slug}`}
