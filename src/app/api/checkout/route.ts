@@ -28,14 +28,16 @@ export async function POST(req: Request) {
 		}));
 
 		const session = await stripe.checkout.sessions.create({
-			payment_method_types: ["card"],
 			mode: "payment",
+			payment_method_types: ["card"],
 			line_items: lineItems,
-			success_url: `${process.env.NEXT_PUBLIC_APP_URL}/success`,
-			cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/canceled`,
+			success_url: `${process.env.NEXT_PUBLIC_APP_URL}/sucesso`,
+			cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/carrinho`,
 		});
 
-		return NextResponse.json({ checkoutUrl: session.url });
+		return NextResponse.json({
+			session_url: session.url,
+		});
 	} catch (error) {
 		console.error("Erro ao criar sessão de checkout:", error);
 		return NextResponse.json(
