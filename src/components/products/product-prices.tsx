@@ -5,8 +5,6 @@ interface ProductPricesProps {
 }
 
 export function ProductPrices({ product }: ProductPricesProps) {
-	console.log(product);
-
 	return (
 		<div className="flex items-center gap-2">
 			<span>

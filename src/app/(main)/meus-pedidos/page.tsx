@@ -24,8 +24,6 @@ export default function MeusPedidos() {
 			}),
 	});
 
-	console.log(data);
-
 	if (data)
 		return (
 			<div className="max-w-[1200px] w-full mx-auto py-8 px-4 flex flex-col gap-4">
