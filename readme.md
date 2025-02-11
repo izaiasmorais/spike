@@ -1,12 +1,13 @@
 # Spike
 
-## Introdução
-
 Um e-commerce de tênis completamente funcional.
 
- <img src="https://img.shields.io/static/v1?label=STATUS&message=DEVELOPING&color=000&style=for-the-badge"/>
- <img src="https://img.shields.io/static/v1?label=NODE&message=V20.18.1&color=000&style=for-the-badge"/>
- <img src="https://img.shields.io/static/v1?label=LICENSE&message=MIT&color=000&style=for-the-badge"/>
+## Introdução
+
+![spine](https://github.com/user-attachments/assets/96e6942e-a246-4853-b1ee-a8ce9fe02959)
+
+
+ <img src="https://img.shields.io/static/v1?label=STATUS&message=DEVELOPING&color=000&style=for-the-badge"/> <img src="https://img.shields.io/static/v1?label=NODE&message=V20.18.1&color=000&style=for-the-badge"/> <img src="https://img.shields.io/static/v1?label=LICENSE&message=MIT&color=000&style=for-the-badge"/>
 
 ## Tecnologias
 
@@ -29,6 +30,7 @@ Um e-commerce de tênis completamente funcional.
 - [x] Carrinho de compras
 - [x] Responsividade
 - [x] Pagamentos via Stripe
+- [ ] Teste e2e com cypress
 
 ## Instalação
 
@@ -49,7 +51,7 @@ Configure o arquivo .env com suas credenciais:
 
 ```env
 NEXT_PUBLIC_DEV_API_URL=""
-NEXT_PUBLIC_APP_URL""
+NEXT_PUBLIC_APP_URL=""
 NEXT_PUBLIC_STRIPE_PUBLIC_KEY=""
 STRIPE_SECRET_KEY=""
 ```
