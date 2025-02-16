@@ -23,6 +23,7 @@ export function useFormMutation<TSchema extends FieldValues>({
 		try {
 			onSubmit(data);
 		} catch (error) {
+			console.error(error);
 			toast.error("Ocorreu um erro ao processar a requisição");
 		}
 	});

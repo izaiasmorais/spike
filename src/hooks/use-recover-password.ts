@@ -9,19 +9,20 @@ const recoverPasswordFormSchema = z.object({
 });
 
 export function useRecoverPassword() {
-	const { mutate: signInFn, isPending: isLoadingRecoverPassword } = useMutation({
-		mutationFn: recoverPassword,
-		onSuccess: (response) => {
-			if (response.success) {
-				console.log(response.data.link);
-				return;
-			}
+	const { mutate: signInFn, isPending: isLoadingRecoverPassword } = useMutation(
+		{
+			mutationFn: recoverPassword,
+			onSuccess: (response) => {
+				if (response.success) {
+					return;
+				}
 
-			if (response.error === "Invalid Credentials") {
-				toast.error("Email inválido.");
-			}
-		},
-	});
+				if (response.error === "Invalid Credentials") {
+					toast.error("Email inválido.");
+				}
+			},
+		}
+	);
 
 	const form = useFormMutation({
 		schema: recoverPasswordFormSchema,

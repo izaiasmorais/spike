@@ -80,9 +80,8 @@ export async function GET(req: Request) {
 
 		return NextResponse.json(orders);
 	} catch (error) {
-		console.error("Erro ao buscar pedidos:", error);
 		return NextResponse.json(
-			{ error: "Erro ao buscar pedidos" },
+			{ error: error },
 			{ status: 500 }
 		);
 	}

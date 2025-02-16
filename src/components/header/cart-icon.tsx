@@ -1,10 +1,10 @@
 "use client";
 import Link from "next/link";
 import { ShoppingCart } from "lucide-react";
-import { useCart } from "@/stores/cart";
+import { useCartStore } from "@/stores/cart";
 
 export default function CartIcon() {
-	const { cart } = useCart();
+	const { cart } = useCartStore();
 
 	return (
 		<Link href="/carrinho" className="relative">

@@ -4,7 +4,7 @@ import { useMutation } from "@tanstack/react-query";
 import { signIn } from "@/api/auth/sign-in";
 import { toast } from "sonner";
 import { z } from "zod";
-import Cookies from "js-cookie";
+import { useAuthStore } from "@/stores/auth";
 
 const signInFormSchema = z.object({
 	email: z.string().email("Digite um email válido."),
@@ -13,14 +13,13 @@ const signInFormSchema = z.object({
 
 export function useSignIn() {
 	const router = useRouter();
+	const { authenticate } = useAuthStore()
 
 	const { mutate: signInFn, isPending: isLoadingSignIn } = useMutation({
 		mutationFn: signIn,
 		onSuccess: (response) => {
 			if (response.success) {
-				Cookies.set("access_token", response.data.token, {
-					expires: 1 / 24,
-				});
+				authenticate(response.data);
 				router.push("/");
 				return;
 			}

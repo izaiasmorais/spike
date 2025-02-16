@@ -27,7 +27,7 @@ interface CartState {
 	clearCart: () => void;
 }
 
-export const useCart = create<CartState>()(
+export const useCartStore = create<CartState>()(
 	persist(
 		(set, get) => ({
 			cart: [],

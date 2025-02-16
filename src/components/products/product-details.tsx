@@ -7,8 +7,7 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { toast } from "sonner";
-import { useCart } from "@/stores/cart";
-
+import { useCartStore } from "@/stores/cart";
 import Image from "next/image";
 import Cookies from "js-cookie";
 
@@ -19,7 +18,7 @@ interface ProductDetailsProps {
 export function ProductDetails({ product }: ProductDetailsProps) {
 	const [size, setSize] = useState<number | null>(null);
 	const router = useRouter();
-	const { addToCart } = useCart();
+	const { addToCart } = useCartStore();
 
 	function handleAddProductToCart() {
 		if (Cookies.get("access_token") === undefined) {
@@ -42,9 +41,10 @@ export function ProductDetails({ product }: ProductDetailsProps) {
 		>
 			<Image
 				src={`${product.images[0]}`}
+				alt={product.title}
 				width={500}
 				height={500}
-				alt={product.title}
+				quality={100}
 				className="rounded-lg"
 			/>
 

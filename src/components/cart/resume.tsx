@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { Button } from "../ui/button";
-import { useCart } from "@/stores/cart";
+import { useCartStore } from "@/stores/cart";
 import { useRouter } from "next/navigation";
 import { formatPrice } from "@/utils/formatPrice";
 import { useMutation } from "@tanstack/react-query";
@@ -9,7 +9,7 @@ import { checkout } from "@/api/stripe/checkout";
 import { LoaderCircle } from "lucide-react";
 
 export function Resume() {
-	const { cart, cartCount, calculateTotal } = useCart();
+	const { cart, cartCount, calculateTotal } = useCartStore();
 	const router = useRouter();
 	const itemsDescription = cartCount() > 1 ? "Itens" : "Item";
 

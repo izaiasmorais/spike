@@ -1,7 +1,6 @@
 import { useFormMutation } from "./use-form-mutation";
 import { useMutation } from "@tanstack/react-query";
 import { signUp } from "@/api/auth/sign-up";
-import { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { z } from "zod";

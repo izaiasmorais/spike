@@ -36,6 +36,7 @@ export function ProductSizes({
 					if (availableSizes.includes(size)) {
 						return (
 							<div
+								key={size}
 								className={`rounded-md w-10 h-10 border flex items-center justify-center
 									cursor-pointer hover:bg-muted/50 ${
 										size === selectedSize ? "border-2 border-black" : ""
@@ -50,6 +51,7 @@ export function ProductSizes({
 					if (!availableSizes.includes(size)) {
 						return (
 							<div
+								key={size}
 								className="rounded-md w-10 h-10 border flex items-center justify-center
 									bg-muted cursor-not-allowed"
 							>

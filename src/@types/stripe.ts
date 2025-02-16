@@ -8,7 +8,7 @@ interface Price {
 	custom_unit_amount: null | unknown;
 	livemode: boolean;
 	lookup_key: null | string;
-	metadata: Record<string, any>;
+	metadata: Record<string, unknown>;
 	nickname: null | string;
 	product: string;
 	recurring: null | unknown;
@@ -34,13 +34,13 @@ export interface StripeProduct {
 	id: string;
 	object: string;
 	active: boolean;
-	attributes: any[];
+	attributes: unknown[];
 	created: number;
 	default_price: Price;
 	description: string;
 	images: string[];
 	livemode: boolean;
-	marketing_features: any[];
+	marketing_features: unknown[];
 	metadata: ProductMetadata;
 	name: string;
 	package_dimensions: null | unknown;

@@ -2,7 +2,6 @@ import type { OrderItem } from "@/app/api/orders/route";
 import {
 	Dialog,
 	DialogContent,
-	DialogDescription,
 	DialogHeader,
 	DialogTitle,
 	DialogTrigger,
@@ -33,9 +32,11 @@ export function OrderItemDialog({ items }: OrderItemDialogProps) {
 							<div key={item.id} className="flex gap-4">
 								<Image
 									src={item.image ?? ""}
-									width={100}
-									height={100}
 									alt={item.title ?? ""}
+									width={128}
+									height={128}
+									quality={100}
+									priority
 									className="rounded-md"
 								/>
 

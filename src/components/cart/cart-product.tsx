@@ -1,7 +1,7 @@
 "use client";
 import { Minus, Plus, Trash } from "lucide-react";
 import { Button } from "../ui/button";
-import { useCart, type CartItem } from "@/stores/cart";
+import { useCartStore, type CartItem } from "@/stores/cart";
 import { formatPrice } from "@/utils/formatPrice";
 import Image from "next/image";
 
@@ -10,17 +10,19 @@ interface CartProductProps {
 }
 
 export function CartProduct({ product }: CartProductProps) {
-	const { increaseQuantity, decreaseQuantity, removeFromCart } = useCart();
+	const { increaseQuantity, decreaseQuantity, removeFromCart } = useCartStore();
 
 	return (
 		<div className="flex gap-4 border rounded-md p-4 w-full justify-between">
 			<div className="flex gap-4">
 				<Image
 					src={`${product.imageUrl}`}
+					alt={product.title}
 					width={128}
 					height={128}
-					alt={product.title}
+					quality={100}
 					className="rounded-lg"
+					priority
 				/>
 
 				<div className="flex flex-col justify-between">

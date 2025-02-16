@@ -9,6 +9,11 @@ interface SignInRequest {
 
 interface SignInSuccessResponse extends HTTPSuccessResponse {
 	data: {
+		user: {
+			id: string;
+			name: string;
+			email: string;
+		};
 		token: string;
 	};
 }

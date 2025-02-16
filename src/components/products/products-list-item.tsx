@@ -18,8 +18,10 @@ export function ProductsListItem({ product }: ProductsListItemProps) {
 				src={product.images[0]}
 				width={350}
 				height={350}
+				quality={100}
 				alt={product.title}
 				className="rounded-md overflow-hidden"
+				priority
 			/>
 
 			<div className="flex flex-col text-left gap-2">

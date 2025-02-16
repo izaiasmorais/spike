@@ -1,6 +1,18 @@
 import { ProductDetails } from "@/components/products/product-details";
 import { stripe } from "@/lib/stripe";
+import { notFound } from "next/navigation";
+import { Metadata } from "next";
 import Stripe from "stripe";
+
+export const metadata: Metadata = {
+	title: "Produto",
+};
+
+interface ProductPageProps {
+	params: {
+		slug: string;
+	};
+}
 
 async function fetchProductBySlug(slug: string) {
 	const response = await stripe.products.list({
@@ -10,6 +22,9 @@ async function fetchProductBySlug(slug: string) {
 	const product = response.data.find(
 		(p) => p.metadata.slug === slug
 	) as Stripe.Product;
+
+	if (!product) return null;
+
 	const price = product.default_price as Stripe.Price;
 
 	return {
@@ -36,16 +51,12 @@ async function fetchProductBySlug(slug: string) {
 	};
 }
 
-interface ProductProps {
-	params: {
-		slug: string;
-	};
-}
-
-export default async function ProductDetailsContainer({
-	params,
-}: ProductProps) {
+export default async function ProductPage({ params }: ProductPageProps) {
 	const product = await fetchProductBySlug(params.slug);
+
+	if (!product) {
+		notFound();
+	}
 
 	return <ProductDetails product={product} />;
 }

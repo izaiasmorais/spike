@@ -1,9 +1,9 @@
 "use client";
-import { useCart } from "@/stores/cart";
+import { useCartStore } from "@/stores/cart";
 import { CartProduct } from "./cart-product";
 
 export function CartProducts() {
-	const { cart } = useCart();
+	const { cart } = useCartStore();
 
 	return (
 		<div className="flex flex-col gap-6">

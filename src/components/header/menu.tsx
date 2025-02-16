@@ -11,9 +11,16 @@ import {
 } from "../ui/dropdown-menu";
 import { useAuthStore } from "@/stores/auth";
 import Link from "next/link";
+import { useCartStore } from "@/stores/cart";
 
 export function Menu() {
 	const { logout, isAuthenticated, user } = useAuthStore();
+	const { clearCart } = useCartStore();
+
+	function handleLogOut() {
+		logout();
+		clearCart();
+	}
 
 	return (
 		<DropdownMenu>
@@ -48,7 +55,7 @@ export function Menu() {
 							<Link href="/entrar" className="flex items-center">
 								<DropdownMenuItem
 									className="cursor-pointer w-full"
-									onClick={logout}
+									onClick={() => handleLogOut()}
 								>
 									<LogIn className="h-4 w-4" />
 									<span>Entrar</span>
@@ -63,7 +70,7 @@ export function Menu() {
 
 							<DropdownMenuItem
 								className="cursor-pointer w-full"
-								onClick={logout}
+								onClick={() => handleLogOut()}
 								asChild
 							>
 								<Link href="/entrar" className="flex items-center">

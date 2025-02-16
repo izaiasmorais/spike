@@ -1,5 +1,10 @@
 import { CartProducts } from "@/components/cart/cart-products";
 import { Resume } from "@/components/cart/resume";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: "Carrinho",
+};
 
 export default function Cart() {
 	return (

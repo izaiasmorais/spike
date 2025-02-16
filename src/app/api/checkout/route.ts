@@ -32,7 +32,7 @@ export async function POST(req: Request) {
 			payment_method_types: ["card"],
 			line_items: lineItems,
 			billing_address_collection: "required",
-			success_url: `${process.env.NEXT_PUBLIC_APP_URL}/sucesso`,
+			success_url: `${process.env.NEXT_PUBLIC_APP_URL}/meus-pedidos`,
 			cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/carrinho`,
 		});
 
@@ -40,9 +40,8 @@ export async function POST(req: Request) {
 			session_url: session.url,
 		});
 	} catch (error) {
-		console.error("Erro ao criar sessão de checkout:", error);
 		return NextResponse.json(
-			{ error: "Erro ao processar o checkout" },
+			{ error: error },
 			{ status: 500 }
 		);
 	}
