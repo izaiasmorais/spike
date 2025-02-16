@@ -1,30 +1,42 @@
-import { HTTPResponse } from "@/@types/http";
-import { User } from "@/@types/user";
+import type { HTTPErrorResponse, HTTPSuccessResponse } from "@/@types/http";
 import { api } from "@/lib/axios";
+import { AxiosError } from "axios";
 
-interface SignInResponseBody extends HTTPResponse {
+interface SignInRequest {
+	email: string;
+	password: string;
+}
+
+interface SignInSuccessResponse extends HTTPSuccessResponse {
 	data: {
 		token: string;
-		user: {
-			id: string;
-			name: string;
-			email: string;
-		};
 	};
 }
 
-export async function signIn({
-	email,
-	password,
-}: Omit<User, "id" | "name">): Promise<SignInResponseBody> {
-	try {
-		const response = await api.post<SignInResponseBody>("/auth/sign-in", {
-			email,
-			password,
-		});
+interface SignInErrorResponse extends HTTPErrorResponse {
+	data: null;
+}
 
+type SignInResponse = SignInSuccessResponse | SignInErrorResponse;
+
+export async function signIn(
+	credentials: SignInRequest
+): Promise<SignInResponse> {
+	try {
+		const response = await api.post<SignInSuccessResponse>(
+			"/auth/sign-in",
+			credentials
+		);
 		return response.data;
 	} catch (error) {
-		throw error;
+		if (error instanceof AxiosError && error.response?.data) {
+			return error.response.data;
+		}
+
+		return {
+			success: false,
+			error: "Erro desconhecido",
+			data: null,
+		};
 	}
 }

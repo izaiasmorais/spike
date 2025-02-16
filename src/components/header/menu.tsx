@@ -48,7 +48,7 @@ export function Menu() {
 							<Link href="/entrar" className="flex items-center">
 								<DropdownMenuItem
 									className="cursor-pointer w-full"
-									onClick={() => logout()}
+									onClick={logout}
 								>
 									<LogIn className="h-4 w-4" />
 									<span>Entrar</span>
@@ -61,15 +61,16 @@ export function Menu() {
 						<>
 							<DropdownMenuSeparator />
 
-							<Link href="/entrar" className="flex items-center">
-								<DropdownMenuItem
-									className="cursor-pointer w-full"
-									onClick={() => logout()}
-								>
+							<DropdownMenuItem
+								className="cursor-pointer w-full"
+								onClick={logout}
+								asChild
+							>
+								<Link href="/entrar" className="flex items-center">
 									<LogOut className="h-4 w-4" />
 									<span>Sair</span>
-								</DropdownMenuItem>
-							</Link>
+								</Link>
+							</DropdownMenuItem>
 						</>
 					)}
 				</DropdownMenuGroup>

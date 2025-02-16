@@ -1,4 +1,9 @@
-export interface HTTPResponse {
-	success: boolean;
-	error: string | null;
+export interface HTTPSuccessResponse {
+	success: true;
+	error: null;
+}
+
+export interface HTTPErrorResponse {
+	success: false;
+	error: string;
 }
