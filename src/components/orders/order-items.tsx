@@ -36,8 +36,8 @@ export function OrderItemDialog({ items }: OrderItemDialogProps) {
 									width={128}
 									height={128}
 									quality={100}
-									priority
 									className="rounded-md"
+									priority
 								/>
 
 								<div>

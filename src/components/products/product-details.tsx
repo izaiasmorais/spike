@@ -46,6 +46,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
 				height={500}
 				quality={100}
 				className="rounded-lg"
+				priority
 			/>
 
 			<div className="flex flex-col gap-2">
