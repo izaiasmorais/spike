@@ -1,31 +1,24 @@
-import { NextRequest, NextResponse } from "next/server";
-import { parse } from "cookie";
+import { NextResponse, type NextRequest } from "next/server";
+import { jwtDecode } from "jwt-decode";
 
-export async function middleware(request: NextRequest) {
-	const { pathname } = request.nextUrl;
+export function middleware(request: NextRequest) {
 	const url = request.nextUrl.clone();
+	const path = url.pathname;
+	const userToken = request.cookies.get("access_token")?.value;
 
-	const cookies = parse(request.headers.get("cookie") || "");
-	const userToken = cookies["access_token"];
-
-	const isUserAuthenticated = userToken ? true : false;
-	const privateRoutes = ["/meus-pedidos"];
-
-	if (
-		isUserAuthenticated &&
-		(pathname === "/entrar" || pathname === "/cadastro")
-	) {
-		url.pathname = "/";
-		return NextResponse.redirect(url);
+	if (path !== "/meus-pedidos") {
+		return NextResponse.next();
 	}
 
-	if (!isUserAuthenticated) {
-		url.pathname = "/entrar";
-
-		if (privateRoutes.includes(pathname)) {
-			return NextResponse.redirect(url);
+	if (userToken) {
+		try {
+			jwtDecode(userToken);
+			return NextResponse.next();
+		} catch (error) {
+			console.error("Token inválido:", error);
 		}
 	}
 
-	return NextResponse.next();
+	url.pathname = "/entrar";
+	return NextResponse.redirect(url);
 }
