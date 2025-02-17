@@ -8,7 +8,7 @@ import { useMutation } from "@tanstack/react-query";
 import { checkout } from "@/api/stripe/checkout";
 import { LoaderCircle } from "lucide-react";
 
-export function Resume() {
+export function CartOrderResume() {
 	const { cart, cartCount, calculateTotal } = useCartStore();
 	const router = useRouter();
 	const itemsDescription = cartCount() > 1 ? "Itens" : "Item";

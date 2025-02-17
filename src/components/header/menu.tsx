@@ -12,12 +12,15 @@ import {
 import { useAuthStore } from "@/stores/auth";
 import Link from "next/link";
 import { useCartStore } from "@/stores/cart";
+import { useRouter } from "next/navigation";
 
 export function Menu() {
 	const { logout, isAuthenticated, user } = useAuthStore();
 	const { clearCart } = useCartStore();
+	const router = useRouter();
 
 	function handleLogOut() {
+		router.push("/entrar");
 		logout();
 		clearCart();
 	}
@@ -41,26 +44,23 @@ export function Menu() {
 						</>
 					)}
 
-					<Link href="/meus-pedidos" className="flex items-center">
-						<DropdownMenuItem className="cursor-pointer  w-full">
+					<DropdownMenuItem className="cursor-pointer  w-full" asChild>
+						<Link href="/meus-pedidos" className="flex items-center">
 							<User className="h-4 w-4" />
 							<span>Meus Pedidos</span>
-						</DropdownMenuItem>
-					</Link>
+						</Link>
+					</DropdownMenuItem>
 
 					{!isAuthenticated && (
 						<>
 							<DropdownMenuSeparator />
 
-							<Link href="/entrar" className="flex items-center">
-								<DropdownMenuItem
-									className="cursor-pointer w-full"
-									onClick={() => handleLogOut()}
-								>
+							<DropdownMenuItem className="cursor-pointer w-full" asChild>
+								<Link href={"/entrar"}>
 									<LogIn className="h-4 w-4" />
 									<span>Entrar</span>
-								</DropdownMenuItem>
-							</Link>
+								</Link>
+							</DropdownMenuItem>
 						</>
 					)}
 
@@ -71,12 +71,9 @@ export function Menu() {
 							<DropdownMenuItem
 								className="cursor-pointer w-full"
 								onClick={() => handleLogOut()}
-								asChild
 							>
-								<Link href="/entrar" className="flex items-center">
-									<LogOut className="h-4 w-4" />
-									<span>Sair</span>
-								</Link>
+								<LogOut className="h-4 w-4" />
+								<span>Sair</span>
 							</DropdownMenuItem>
 						</>
 					)}

@@ -12,20 +12,29 @@ import { EmptyState } from "@/components/ui/empty-state";
 import { getOrders } from "@/api/stripe/orders";
 import { useAuthStore } from "@/stores/auth";
 import { useQuery } from "@tanstack/react-query";
+import { useState, useEffect } from "react";
 
 export function OrderTable() {
 	const { user } = useAuthStore();
-	const { data, isPending: isLoadingOrders } = useQuery({
-		queryKey: ["orders"],
+	const [isFetchingOrders, setIsFetchingOrders] = useState(true);
+
+	const { data, isFetching } = useQuery({
+		queryKey: ["orders", user?.email],
 		queryFn: () =>
 			getOrders({
 				email: user?.email ?? "",
 			}),
+		enabled: !!user?.email,
 	});
 
-	const isEmpty =
-		(!isLoadingOrders && !data) ||
-		(!isLoadingOrders && data && data.length === 0);
+	useEffect(() => {
+		if (isFetching) {
+			setIsFetchingOrders(true);
+		} else {
+			const timeout = setTimeout(() => setIsFetchingOrders(false), 300);
+			return () => clearTimeout(timeout);
+		}
+	}, [isFetching]);
 
 	return (
 		<div className="rounded-md border">
@@ -46,9 +55,9 @@ export function OrderTable() {
 				</TableHeader>
 
 				<TableBody>
-					{isLoadingOrders && <OrderTableSkeleton />}
+					{isFetchingOrders && <OrderTableSkeleton />}
 
-					{!isLoadingOrders &&
+					{!isFetchingOrders &&
 						data &&
 						data.length > 0 &&
 						data.map((order) => (
@@ -57,7 +66,7 @@ export function OrderTable() {
 				</TableBody>
 			</Table>
 
-			{isEmpty && <EmptyState />}
+			{!isFetchingOrders && (!data || data.length === 0) && <EmptyState />}
 		</div>
 	);
 }
