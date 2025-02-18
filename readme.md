@@ -1,6 +1,6 @@
 # Spike
 
-Um e-commerce de tênis completamente funcional.
+Um e-commerce completamente funcional.
 
 ## Introdução
 
@@ -21,6 +21,7 @@ Um e-commerce de tênis completamente funcional.
 - Gerenciamento de formulários: [React Hook Form](https://www.react-hook-form.com/)
 - Validação: [Zod](https://zod.dev/)
 - Pagamentos: [Stripe](https://stripe.com/)
+- Testes: [Playwirght](https://playwright.dev/)
 
 ## Funcionalidades
 
@@ -30,7 +31,7 @@ Um e-commerce de tênis completamente funcional.
 - [x] Carrinho de compras
 - [x] Responsividade
 - [x] Pagamentos via Stripe
-- [ ] Teste e2e com cypress
+- [x] Testes e2e com Playwright
 
 ## Instalação
 
@@ -50,10 +51,10 @@ pnpm install
 Configure o arquivo .env com suas credenciais:
 
 ```env
-NEXT_PUBLIC_DEV_API_URL=""
-NEXT_PUBLIC_APP_URL=""
-NEXT_PUBLIC_STRIPE_PUBLIC_KEY=""
-STRIPE_SECRET_KEY=""
+NEXT_PUBLIC_DEV_API_URL="http..."
+NEXT_PUBLIC_APP_URL="http..."
+NEXT_PUBLIC_STRIPE_PUBLIC_KEY="pk_test..."
+STRIPE_SECRET_KEY="sk_test..."
 ```
 
 ## Executando o Projeto
@@ -62,4 +63,18 @@ Inicie o servidor:
 
 ```bash
 pnpm dev
+```
+
+## Executando testes
+
+Executar todos os testes no termial:
+
+```bash
+pnpm test
+```
+
+Executar todos os testes através da UI do Playwright:
+
+```bash
+pnpm play
 ```
